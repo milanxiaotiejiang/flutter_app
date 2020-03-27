@@ -15,13 +15,13 @@ final ThemeData kIOSTheme = ThemeData(
 
 // Android深色主题
 final ThemeData kAndroidTheme = ThemeData(
-    brightness: Brightness.dark,
     //深色主题
-    accentColor: Colors.black,
+//    brightness: Brightness.dark,
     //(按钮)Widget前景色为黑色
-    primaryColor: Colors.cyan,
+//    accentColor: Colors.black,
     //主题色Wie青色
-    iconTheme: IconThemeData(color: Colors.blue),
+    primaryColor: Colors.cyan,
     //icon主题色为蓝色
-    textTheme: TextTheme(body1: TextStyle(color: Colors.red)) //文本主题色为红色
-    );
+    iconTheme: IconThemeData(color: Colors.blue),
+    //文本主题色为红色
+    textTheme: TextTheme(body1: TextStyle(color: Colors.red)));

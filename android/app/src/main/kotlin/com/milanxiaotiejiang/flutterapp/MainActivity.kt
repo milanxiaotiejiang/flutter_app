@@ -1,7 +1,9 @@
 package com.milanxiaotiejiang.flutterapp
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.annotation.TargetApi
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.kotlin.base.ext.createIntent
 import com.orhanobut.logger.Logger
 import io.flutter.embedding.android.FlutterActivity
@@ -52,7 +54,14 @@ class MainActivity : FlutterActivity() {
                 }
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //隐藏虚拟按键，并且全屏
+        //隐藏虚拟按键，并且全屏
+        val _window = window
+        val params = _window.attributes
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE
+        _window.attributes = params
     }
 }

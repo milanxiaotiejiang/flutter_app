@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterapp/pages/error_page.dart';
 import 'package:flutterapp/pages/my_home_page.dart';
 import 'package:flutterapp/services/log_services.dart';
@@ -34,6 +35,12 @@ Future<Null> main() async {
     //设置帧回调函数并保存原始帧回调函数
 //    orginalCallback = window.onReportTimings;
 //    window.onReportTimings = onReportTimings;
+    if (Platform.isAndroid) {
+      SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, //设置为透明
+      );
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
   }, onError: (error, stackTrace) async {
     //拦截异常
     await _reportError(error, stackTrace);

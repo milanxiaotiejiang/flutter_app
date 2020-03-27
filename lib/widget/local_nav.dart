@@ -12,13 +12,22 @@ class LocalNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 64,
+      /**
+       * 提供了多种绘制盒子的方法。
+       */
       decoration: BoxDecoration(
         color: Colors.white,
+        /**
+         * 圆角
+         */
         borderRadius: BorderRadius.all(
           Radius.circular(6),
         ),
       ),
       child: Padding(
+        /**
+         * all(double value) : 所有方向均使用相同数值的填充。
+         */
         padding: EdgeInsets.all(7),
         child: _items(context),
       ),
@@ -31,6 +40,9 @@ class LocalNav extends StatelessWidget {
     localNavList.forEach((model) {
       items.add(_item(context, model));
     });
+    /**
+     * 沿水平方向展示它的子组件的组件
+     */
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: items,
@@ -48,6 +60,9 @@ class LocalNav extends StatelessWidget {
               hideAppBar: model.hideAppBar,
             ));
       },
+      /**
+       * column主轴方向是垂直的方向
+       */
       child: Column(
         children: <Widget>[
           Image.network(

@@ -23,6 +23,7 @@ class SalesBox extends StatelessWidget {
   _items(BuildContext context) {
     if (salesBox == null) return null;
     List<Widget> items = [];
+    //第一栏，上面绘制横线
     items.add(_doubleItem(
         context, salesBox.bigCard1, salesBox.bigCard2, true, false));
     items.add(_doubleItem(
@@ -88,6 +89,7 @@ class SalesBox extends StatelessWidget {
 
   Widget _doubleItem(BuildContext context, CommonModel leftCard,
       CommonModel rightCard, bool big, bool last) {
+    //横
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
