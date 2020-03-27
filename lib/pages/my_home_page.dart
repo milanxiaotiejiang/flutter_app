@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/app_theme.dart';
+import 'package:flutterapp/dao/net_work.dart';
 import 'package:flutterapp/navigator/tab_navigator.dart';
 import 'package:flutterapp/pages/unknown_page.dart';
-import 'package:flutterapp/services/navigation_services.dart';
+import 'package:flutterapp/util/pv_exception.dart';
 
-class HomePage extends StatelessWidget {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    NetWork().createInstance();
     return MaterialApp(
       title: 'Flutter',
       //标题
@@ -24,6 +26,9 @@ class HomePage extends StatelessWidget {
       onUnknownRoute: (RouteSettings setting) =>
           MaterialPageRoute(builder: (context) => UnknownPage()),
       home: TabNavigator(),
+      navigatorObservers: [
+        MyObserver(),
+      ],
     );
   }
 }

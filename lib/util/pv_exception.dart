@@ -15,8 +15,6 @@ Future<Null> reportError(dynamic error, dynamic stackTrace) async {
 
 int totalPV = 0;
 
-/// //设置路由监听 navigatorObservers: [ MyObserver(), ], home: HomePage(),
-
 class MyObserver extends NavigatorObserver {
   @override
   void didPush(Route route, Route previousRoute) {

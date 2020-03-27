@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/pages/error_page.dart';
-import 'package:flutterapp/pages/home_page.dart';
+import 'package:flutterapp/pages/my_home_page.dart';
 import 'package:flutterapp/services/log_services.dart';
+import 'package:provider/provider.dart';
 import 'plugin/flutter_crash_plugin.dart';
-import 'util/fps_calculate.dart';
 import 'util/pv_exception.dart';
-import 'package:flutter/src/scheduler/binding.dart';
 
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
   reportError(error, stackTrace);
@@ -18,7 +18,7 @@ Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
 /// Flutter 的核心设计思想便是“一切皆 Widget”
 /// Flutter 的视图开发是声明式的，其核心设计思想就是将视图和数据分离，这与 React 的设计思路完全一致。
 /// 总结来说，命令式编程强调精确控制过程细节；而声明式编程强调通过意图输出结果整体。
-void main() async {
+Future<Null> main() async {
   //注册Flutter框架的异常回调
   FlutterError.onError = (FlutterErrorDetails details) async {
     //转发至Zone的错误回调
@@ -29,11 +29,11 @@ void main() async {
     return ErrorPage();
   };
   //使用runZone方法将runApp的运行放置在Zone中，并提供统一的异常回调
-  runZoned(() async {
+  runZoned<Future<Null>>(() async {
     runApp(MyApp());
     //设置帧回调函数并保存原始帧回调函数
-    orginalCallback = window.onReportTimings;
-    window.onReportTimings = onReportTimings;
+//    orginalCallback = window.onReportTimings;
+//    window.onReportTimings = onReportTimings;
   }, onError: (error, stackTrace) async {
     //拦截异常
     await _reportError(error, stackTrace);
@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   //构建视图
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    return MyHomePage();
   }
 
   //当状态数据发生变化时

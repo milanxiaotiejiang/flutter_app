@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/pages/main/home_page.dart';
+import 'package:flutterapp/pages/main/my_page.dart';
+import 'package:flutterapp/pages/main/search_page.dart';
+import 'package:flutterapp/pages/main/travel_page.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -14,7 +18,17 @@ class _TabNavigatorState extends State<TabNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//        body: Text("aaaaaaaaaaa"),
+        body: PageView(
+          controller: _controller,
+          children: <Widget>[
+            HomePage(),
+            SearchPage(
+              hideLeft: true,
+            ),
+            TravelPage(),
+            MyPage(),
+          ],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
