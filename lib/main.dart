@@ -9,6 +9,7 @@ import 'package:flutterapp/pages/error_page.dart';
 import 'package:flutterapp/pages/my_home_page.dart';
 import 'package:flutterapp/services/log_services.dart';
 import 'package:provider/provider.dart';
+import 'model/counter_model.dart';
 import 'plugin/flutter_crash_plugin.dart';
 import 'util/pv_exception.dart';
 
@@ -94,7 +95,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   //构建视图
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return ChangeNotifierProvider.value(
+      value: CounterModel(), //需要共享的数据资源
+      child: MyHomePage(),
+    );
   }
 
   //当状态数据发生变化时
