@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/pages/main/home_page.dart';
 import 'package:flutterapp/pages/main/my_page.dart';
-import 'package:flutterapp/pages/main/search_page.dart';
+import 'file:///E:/zt/project/flutter/flutter_app/flutter_app/lib/pages/search_page.dart';
 import 'package:flutterapp/pages/main/travel_page.dart';
 
 class TabNavigator extends StatefulWidget {
@@ -21,11 +21,8 @@ class _TabNavigatorState extends State<TabNavigator> {
         body: PageView(
           controller: _controller,
           children: <Widget>[
-            HomePage(),
-            SearchPage(
-              hideLeft: true,
-            ),
             TravelPage(),
+            HomePage(),
             MyPage(),
           ],
         ),
@@ -40,7 +37,6 @@ class _TabNavigatorState extends State<TabNavigator> {
           type: BottomNavigationBarType.fixed,
           items: [
             _bottomItem('首页', Icons.home, 0),
-            _bottomItem('搜索', Icons.search, 1),
             _bottomItem('旅拍', Icons.camera_alt, 2),
             _bottomItem('我的', Icons.account_circle, 3),
           ],

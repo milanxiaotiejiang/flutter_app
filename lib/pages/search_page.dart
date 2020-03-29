@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/dao/search_dao.dart';
 import 'package:flutterapp/model/seach_model.dart';
@@ -52,24 +51,30 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    /**
+     * Scaffold 实现了基本的 Material 布局。只要是在 Material 中定义了的单个界面显示的布局控件元素，都可以使用 Scaffold 来绘制。
+        提供展示抽屉（drawers，比如：左边栏）、通知（snack bars） 以及 底部按钮（bottom sheets）。
+        我们可以将 Scaffold 理解为一个布局的容器。可以在这个容器中绘制我们的用户界面。
+     */
     return Scaffold(
-        body: Column(
-      children: <Widget>[
-        _appBar(),
-        MediaQuery.removePadding(
-          removeTop: true,
-          context: context,
-          child: Expanded(
-            flex: 1,
-            child: ListView.builder(
-                itemCount: searchModel?.data?.length ?? 0,
-                itemBuilder: (BuildContext context, int index) {
-                  return _item(index);
-                }),
-          ),
-        )
-      ],
-    ));
+      body: Column(
+        children: <Widget>[
+          _appBar(),
+          MediaQuery.removePadding(
+            removeTop: true,
+            context: context,
+            child: Expanded(
+              flex: 1,
+              child: ListView.builder(
+                  itemCount: searchModel?.data?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _item(index);
+                  }),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   _onTextChange(String text) {
@@ -96,6 +101,9 @@ class _SearchPageState extends State<SearchPage> {
   _appBar() {
     return Column(
       children: <Widget>[
+        /**
+         * Container在Flutter中太常见了。官方给出的简介，是一个结合了绘制（painting）、定位（positioning）以及尺寸（sizing）widget的widget。
+         */
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -106,25 +114,25 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.only(top: 25),
-            height: 80,
-            decoration: BoxDecoration(color: Colors.white),
-            child: SearchBar(
-              hideLeft: widget.hideLeft,
-              defaultText: widget.keyword,
-              hint: widget.hint,
-              speakClick: _jumpToSpeak,
-              rightButtonClick: () {
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              leftButtonClick: () {
-                FocusScope.of(context).requestFocus(FocusNode());
-                Navigator.pop(context);
-              },
-              onChanged: _onTextChange,
-            ),
-          ),
-        ),
+              padding: EdgeInsets.only(top: 25),
+              height: 80,
+              decoration: BoxDecoration(color: Colors.white),
+              child: SearchBar(
+                hideLeft: widget.hideLeft,
+                defaultText: widget.keyword,
+                hint: widget.hint,
+                speakClick: _jumpToSpeak,
+                rightButtonClick: () {
+                  /// 获得焦点
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                leftButtonClick: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  Navigator.pop(context);
+                },
+                onChanged: _onTextChange,
+              )),
+        )
       ],
     );
   }
@@ -152,12 +160,11 @@ class _SearchPageState extends State<SearchPage> {
         child: Row(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(11),
+              margin: EdgeInsets.all(1),
               child: Image(
-                height: 26,
-                width: 26,
-                image: AssetImage(_typeImage(item.type)),
-              ),
+                  height: 26,
+                  width: 26,
+                  image: AssetImage(_typeImage(item.type))),
             ),
             Column(
               children: <Widget>[
@@ -170,25 +177,10 @@ class _SearchPageState extends State<SearchPage> {
                     margin: EdgeInsets.only(top: 5),
                     child: _subTitle(item))
               ],
-            ),
+            )
           ],
         ),
       ),
-    );
-  }
-
-  _subTitle(SearchItem item) {
-    return RichText(
-      text: TextSpan(children: <TextSpan>[
-        TextSpan(
-          text: item.price ?? '',
-          style: TextStyle(fontSize: 16, color: Colors.orange),
-        ),
-        TextSpan(
-          text: ' ' + (item.star ?? ''),
-          style: TextStyle(fontSize: 12, color: Colors.grey),
-        )
-      ]),
     );
   }
 
@@ -214,6 +206,21 @@ class _SearchPageState extends State<SearchPage> {
         text: ' ' + (item.districtname ?? '') + ' ' + (item.zonename ?? ''),
         style: TextStyle(fontSize: 16, color: Colors.grey)));
     return RichText(text: TextSpan(children: spans));
+  }
+
+  _subTitle(SearchItem item) {
+    return RichText(
+      text: TextSpan(children: <TextSpan>[
+        TextSpan(
+          text: item.price ?? '',
+          style: TextStyle(fontSize: 16, color: Colors.orange),
+        ),
+        TextSpan(
+          text: ' ' + (item.star ?? ''),
+          style: TextStyle(fontSize: 12, color: Colors.grey),
+        )
+      ]),
+    );
   }
 
   _keywordTextSpans(String word, String keyword) {

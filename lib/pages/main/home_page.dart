@@ -6,7 +6,7 @@ import 'package:flutterapp/model/common_model.dart';
 import 'package:flutterapp/model/grid_nav_model.dart';
 import 'package:flutterapp/model/home_model.dart';
 import 'package:flutterapp/model/sales_box_model.dart';
-import 'package:flutterapp/pages/main/search_page.dart';
+import 'file:///E:/zt/project/flutter/flutter_app/flutter_app/lib/pages/search_page.dart';
 import 'package:flutterapp/services/log_services.dart';
 import 'package:flutterapp/util/navigator_util.dart';
 import 'package:flutterapp/widget/grid_nav.dart';
